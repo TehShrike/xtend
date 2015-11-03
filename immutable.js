@@ -1,19 +1,11 @@
+var mutableExtend = require('./mutable')
+
 module.exports = extend
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
-            }
-        }
+    var args = [{}]
+    for (var i = 0; i < arguments.length; ++i) {
+        args.push(arguments[i])
     }
-
-    return target
+    return mutableExtend.apply(null, args)
 }
